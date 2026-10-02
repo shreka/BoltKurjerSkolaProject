@@ -1,5 +1,44 @@
 # BoltKurjerSkolaProject
 Autori: Aleksandr and Valera
+
+Android lietotne saziņai ar Arduino, izmantojot Bluetooth
+Projekta apraksts
+Šī projekta mērķis ir izveidot Android lietotni, kas apstrādā informāciju telefonā un nosūta rezultātus uz Arduino Uno ar HM-10 Bluetooth Low Energy (BLE) moduļa starpniecību. Arduino saņemto tekstu attēlo LCD ekrānā ar I²C savienojumu.
+Pašlaik lietotne ir paredzēta teksta nosūtīšanai un Python loģikas integrēšanas izmēģināšanai. Nākamais projekta posms ir telefona kameras un mākslīgā intelekta izmantošana, lai noteiktu cilvēkus un šķēršļus.
+Izmantotās tehnoloģijas
+- Android Studio un Kotlin — lietotnes saskarne, Bluetooth savienojums un Android funkcijas.
+- Chaquopy un Python — Python koda izpilde Android lietotnē un tā rezultātu nodošana Kotlin daļai.
+- Bluetooth Low Energy (BLE) — bezvadu datu pārraide starp telefonu un HM-10 moduli.
+- Arduino Uno — no Bluetooth moduļa saņemto datu apstrāde.
+- I²C LCD — saņemto ziņojumu attēlošana.
+- OpenCV / NumPy — bibliotēkas, kas paredzētas turpmākai attēlu apstrādei.
+Darbības princips
+1. Android lietotne izveido BLE savienojumu ar HM-10 moduli.
+2. Lietotājs ievada tekstu vai tiek palaista telefonā esoša Python loģika.
+3. Kotlin daļa iegūst nosūtāmo rezultātu un pārsūta to pa Bluetooth.
+4. HM-10 nodod datus Arduino, kas tos parāda LCD ekrānā.
+Datu plūsma: Android (Kotlin + Python) → BLE → HM-10 → Arduino Uno → I²C LCD
+Python kods darbojas telefonā, nevis Arduino. Uz Arduino tiek sūtīts tikai apstrādes rezultāts, piemēram, Hello, STOP vai OBSTACLE.
+Bluetooth savienojums
+Projektā izmantotais HM-10 tipa modulis atbalsta BLE. Savienojumam tiek izmantoti moduļa piedāvātie pakalpojumi un rakstīšanai piemērotā raksturlieluma UUID. Konkrētais UUID ir jāpārbauda attiecīgajam modulim, jo dažādām versijām tas var atšķirties.
+Android lietotnei nepieciešamas atbilstošas Bluetooth atļaujas; to prasības atšķiras atkarībā no Android versijas.
+Python integrācija
+Python integrācijai tiek izmantots Chaquopy, kas ļauj Kotlin kodam izsaukt Python funkcijas vienas Android lietotnes ietvaros. Tas dod iespēju vēlāk pievienot sarežģītāku datu apstrādi, nemainot galveno saziņas principu ar Arduino.
+Vienkāršs paredzētās darbības piemērs:
+def process_text(text):
+    return text
+Funkcijas atgrieztā vērtība tiek nodota Kotlin daļai, kas to nosūta uz Arduino. Python print() izvade pati par sevi netiek automātiski pārsūtīta pa Bluetooth — tā ir atsevišķi jāiegūst vai jāizmanto funkcijas atgrieztā vērtība.
+Turpmākā attīstība
+Plānots pievienot telefona kameras attēlu apstrādi ar YOLO objektu noteikšanas modeli un vēlāk arī NCNN izpildvidi, ja tā būs saderīga ar izvēlēto Android integrācijas risinājumu.
+Paredzētās funkcijas:
+- Cilvēka noteikšana un komandas STOP nosūtīšana, ja cilvēks atrodas ierīces kustības ceļā.
+- Šķēršļu noteikšana un komandas OBSTACLE nosūtīšana.
+- Objektu atrašanās vietas noteikšana attēlā, lai atšķirtu šķēršļus kustības ceļā no objektiem ārpus tā.
+- Brīvās vietas un pagriezienu noteikšana skolas gaiteņos.
+Šīs ir plānotās, nevis jau pilnībā ieviestās funkcijas. Objektu noteikšanai papildus būs vajadzīga kustības ceļa un attāluma novērtēšanas loģika.
+Projekta statuss
+Ir izstrādāta Android lietotnes BLE teksta pārraides pieeja un sākta Python integrācija ar Chaquopy. Python bibliotēku instalēšana ir izdevusies, taču pēdējā zināmā kompilēšanas posmā radās Java un Kotlin JVM mērķversiju neatbilstība (Java 11 / Kotlin 17). Pirms Python un mākslīgā intelekta funkciju izmantošanas gatavā lietotnē šī kļūda jānovērš un viss datu pārraides cikls jāpārbauda ierīcē.
+
 # Autonomā robota šķēršļu un pagriezienu noteikšanas sistēma
 
 ## Projekta apraksts
