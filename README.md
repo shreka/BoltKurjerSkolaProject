@@ -1,2 +1,2 @@
 # BoltKurjerSkolaProject
-Aleksandr and Valera
+Autori: Aleksandr and Valera
