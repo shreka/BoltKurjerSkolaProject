@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sendButton: Button
     private lateinit var messageInput: EditText
     private lateinit var statusText: TextView
+    private lateinit var stopButton: Button
 
     private val handler = Handler(Looper.getMainLooper())
     private var scanning = false
@@ -88,6 +89,11 @@ class MainActivity : AppCompatActivity() {
         messageInput = findViewById(R.id.messageInput)
         statusText = findViewById(R.id.statusText)
         pythonButton = findViewById(R.id.pythonButton)
+        stopButton = findViewById(R.id.stopButton)
+
+        stopButton.setOnClickListener {
+            sendText("STOP")
+        }
 
         connectButton.setOnClickListener {
             if (hasPermissions()) {
@@ -239,6 +245,8 @@ class MainActivity : AppCompatActivity() {
 
         pythonButton.isEnabled = false
         sendButton.isEnabled = false
+        pythonButton.isEnabled = false
+        stopButton.isEnabled = false
         connectButton.isEnabled = false
         showStatus("Searching for HM-10...")
 
@@ -293,6 +301,7 @@ class MainActivity : AppCompatActivity() {
                         tx = null
                         pending.clear()
                         sendButton.isEnabled = false
+                        stopButton.isEnabled = false
                         pythonButton.isEnabled = false
                         connectButton.isEnabled = true
                         showStatus("Disconnected ($status)")
@@ -348,6 +357,7 @@ class MainActivity : AppCompatActivity() {
                 connectButton.text = "Reconnect"
                 sendButton.isEnabled = true
                 pythonButton.isEnabled = true
+                stopButton.isEnabled = true
                 showStatus("Connected to HM-10")
             }
         }

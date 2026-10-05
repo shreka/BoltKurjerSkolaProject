@@ -52,6 +52,14 @@
         android:layout_height="wrap_content"
         android:text="Run Python"
         android:enabled="false" />
+    
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="STOP"
+        android:enabled="false"
+        android:layout_marginTop="12dp" />
 
 
 </LinearLayout>
